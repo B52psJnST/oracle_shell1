@@ -1,0 +1,29 @@
+
+
+
+  select t1.COLUMN_NAME,
+         t2.comments,
+         CASE  WHEN  t1.DATA_TYPE = 'NUMBER'  THEN
+               'NUMBER(' || t1.DATA_PRECISION || ',' || t1.DATA_SCALE || ')'
+               WHEN  t1.DATA_TYPE = 'VARCHAR2'  THEN
+                 'VARCHAR2(' || t1.data_length   || ')'
+         ELSE
+               t1.DATA_TYPE
+         END   数据类型   ,
+         CASE  WHEN  t1.DATA_TYPE = 'NUMBER'  THEN
+               t1.DATA_PRECISION
+         ELSE
+               t1.data_length
+         END       总长度, 
+         t1.DATA_SCALE  小数点后位数
+          from user_tab_cols t1, user_col_comments t2
+         where t1.table_name = t2.table_name
+           and t1.table_name = 'BAS_F_CLASSINFO'
+           and t1.COLUMN_NAME = t2.COLUMN_NAME;
+
+
+
+
+           
+           
+           
